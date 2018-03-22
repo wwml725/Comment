@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="wrapper">
+
+</div>
+<script>
+    //创建一个类
+    class LikeButton{
+        render(){
+            return `
+            <button id="like-btn">
+             <span class='like-text'>赞</span>
+          <span>👍</span>
+</button>
+            `
+        }
+    }
+    const wrapper = document.querySelector('.wrapper');
+    const likeButton = new LikeButton();
+    wrapper.innerHTML = likeButton.render();
+    const likeButton1 = new LikeButton();
+    wrapper.innerHTML+= likeButton1.render()
+    const likeButton2 = new LikeButton();
+    wrapper.innerHTML+= likeButton2.render()
+
+   /*
+   * 现在你会发现按钮是死的，点击它根本不会有什么反应。因为根本没有添加事件。
+   * 但是，LikeButton这个类里面虽然说有一个button，但是这玩意是在字符串里面的。所以不能往字符串里添加事件。
+   * DOM事件的API只有DOM结构可以用。
+   *
+   * 我们需要获取这个dom结构：准确的说我们需要获得这个“html字符串表示的dom结构”
+   * 下一个文件详细探讨：
+   *
+   * */
+</script>
+</body>
+</html>

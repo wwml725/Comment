@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现简单的组件化3</title>
+</head>
+<body>
+<div id="wrapper">
+
+</div>
+<script>
+    /*
+    * 创建一个函数createDOMFromString,传入一个html字符串，会把对应的DOM元素返回给我们。
+    * */
+    const createDOMFromString = (domString)=>{
+        const div = document.createElement("div")
+        div.innerHTML=domString;
+        return div
+    }
+    //对之前的dom结构进行更改
+
+    class LikeButton{
+        render(){
+            this.el = createDOMFromString(
+                `<button class='like-button'>
+          <span class='like-text'>点赞</span>
+          <span>👍</span>
+        </button>`
+            );
+            this.el.addEventListener('click',()=>console.log('click'),false)
+            return this.el
+        }
+    }
+    /*
+    * 现在render返回的不是一个html字符串，而是一个由这个html字符串生成的dom结构。再返回dom元素之前给这个dom元素添加事件再返回。
+    *
+    * 因为现在render返回的是dom元素，所以不能使用innerHTML暴力的插入wrapper。而是要用DOM API插进去。
+    * */
+
+    const wrapper = document.querySelector("#wrapper");
+
+    const likeButton1 = new LikeButton();
+    wrapper.appendChild(likeButton1.render())
+
+    const likeButton2 = new LikeButton();
+    wrapper.appendChild(likeButton2.render())
+
+</script>
+</body>
+</html>
