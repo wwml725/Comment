@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
+import PropTypes from 'prop-types'
+
 export default class CommentApp extends Component{
     constructor () {
         super();
@@ -10,7 +12,9 @@ export default class CommentApp extends Component{
     }
     componentWillMount () {
         this._loadComments()
+
     }
+
     //持久化评论列表
     //将整条评论保存
     _saveComments (comments) {
@@ -37,12 +41,24 @@ export default class CommentApp extends Component{
         console.log(this.state.comments);
     }
 
+    handleDeleteComment(index){
+        const comments = this.state.comments;
+        //删除当前项
+        comments.splice(index, 1)
+        //改变状态
+        this.setState({ comments })
+        //保存新的状态到localStorage
+        this._saveComments(comments)
+    }
+
     render() {
         return (
             <div className='wrapper'>
                 <CommentInput
                     onSubmit={this.handleSubmitComment.bind(this)} />
-                <CommentList comments={this.state.comments}/>
+                <CommentList
+                    onDeleteComment={this.handleDeleteComment.bind(this)}
+                    comments={this.state.comments}/>
             </div>
         )
     }
