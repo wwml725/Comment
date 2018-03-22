@@ -35,6 +35,7 @@ export default class CommentInput extends Component{
         this.textarea.focus()
 
     }
+
     _saveUsername (username) {
         localStorage.setItem('username', username)
     }
